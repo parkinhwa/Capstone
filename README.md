@@ -1,17 +1,17 @@
 # 3D mapping based on ORB SLAM by using drones
 
-##프로젝트 내용 설명
+## 프로젝트 내용 설명
 최근 지하 시설 연계 복합 건축물 및 대공간 상업시설이 늘어남에 따라 실내공간과 이에 대한 이해가 복잡해졌다. 이에 따라 건축물의 내부위치를 쉽게 파악하기 위한 위치기반 서비스로 실내지도의 필요성이 두드러지고 있고, 실제로 구글이나 네이버 등 여러 곳에서 실내지도를 제공하고 있다. 그러나 현재 실내지도를 만드는 과정은 많은 시간과 비용이 들어가기 때문에 빈번한 업데이트가 어렵다는 점이 존재한다. 이 논문에서는 기존에 사용되던 지도 제작 방식에서 벗어나 드론을 활용하여 RGBD 영상을 촬영하고 이를 기반으로 ORB SLAM을 이용하여 지도를 만드는 법을 제안하여 적은 비용으로 실내지도 업데이트를 제작한다. 여기서 더 나아가 객체 인식을 접목하여 객체의 위치를 실내지도에 반영하는 것을 목표로 한다.
 우리의 목적은 3차원으로 구축된 실내공간정보인 실내지도를 현실과 동기화가 지연 없이 이루어지는, 즉 지도의 업데이트가 자주 이루어질 수 있게 자동화 하는 것이 목적. 그래서 드론을 활용하여 이동의 제약을 없애고 객체 인식 또한 자동으로 이루어져 지도에 반영하여 학습된 객체의 위치를 지도에 반영해야 한다.
 
-##프로젝트 역할 분배
+## 프로젝트 역할 분배
 
-![image](https://user-images.githubusercontent.com/65644486/139808828-91a1a7f5-4d7d-403f-91b2-191a0b678330.png)
+![image](https://user-images.githubusercontent.com/65644486/139809559-7f0ca238-c5ab-41d2-9a5f-e5fe7bb1c690.png)
 
 
-##수행내용
+## 수행내용
 
-###1. 객체 인식
+### 1. 객체 인식
 
 ![image](https://user-images.githubusercontent.com/65644486/139801318-879ab55a-f7d5-4935-9a89-3288a5ef42fb.png)
 
@@ -40,39 +40,26 @@ loss (손실률)은 낮을수록 높은 성능을 지닌다.
 
 본 캡스톤에서는 mAP(0.5:0.95)의 값이 0.68이 나왔다. 환경이 다른걸 감안했어도 공식문서에 나와있는 44.5보다 높은 값이 나왔고 성능이 우수한 것을 확인할 수 있다. 
 
-![image](https://user-images.githubusercontent.com/65644486/139801257-fdcea71b-6e5a-4ebf-9505-94972b6a12aa.png)
-그림 4 실시간 카메라로 테스트 진행 화면
+![image](https://user-images.githubusercontent.com/65644486/139809799-c3f5cb51-f9d5-4537-a14a-5836725eb2d5.png)
 
 실제로 N4동 6층 복도에서 테스트해본 결과이며 인식률이 60%~90% 성능을 보인다.
 
 중간보고 때는 객체를 잘못 인식하여 그림5와 같이 iou값이 0이 나오는 경우도 있었으나 이를 최종 보고(그림6)때 개선하였다. iou_average는 정답 값의 bounding box와 detect한 bounding box의 겹치는 비율을 뜻하고 평균적으로 정답과 약 80% 일치하는 것을 확인할 수 있었고 Detection rate는 탐지율로 정답을 맞힌 객체 수/detect를 실행한 전체 객체 수를 뜻한다. 약 95%로 높은 탐지율을 보인다. 이는 중간보고 때보다 성능이 높아진 것을 확인할 수 있다.
 
-![image](https://user-images.githubusercontent.com/65644486/139801177-29f7a9d3-d5b6-4476-a1fb-b5897d04db9c.png)
+![image](https://user-images.githubusercontent.com/65644486/139809869-3760e6b9-c3f8-4170-b8dc-bcf2463f7ac1.png)
 
-그림 5 중간보고 이미지 테스트 결과
-
-![image](https://user-images.githubusercontent.com/65644486/139801185-f0c23fc8-57ed-4084-8cb4-cd00cc1527a0.png)
-
-그림 6 이미지 테스트 결과
-
-![image](https://user-images.githubusercontent.com/65644486/139801146-fbc94f47-84eb-4f3a-8f03-b26a2f504c99.png)
-
-그림 7 colab환경에서 yolov5 inference time 비교표
-
-![image](https://user-images.githubusercontent.com/65644486/139801138-adef81c4-0e82-4b20-bcf4-6cb31bebc738.png)
-
-그림 8 한 장 detect하는데 걸린 시간 평균과 FPS
+![image](https://user-images.githubusercontent.com/65644486/139809975-490c9ef6-6c4a-4076-99db-5d72b54424c0.png)
 
 그림7를 보면 본 프로젝트와 같은 환경(Tesla T4 GPU)에서 테스트한 inference time을 확인할 수 있다. 그림에서 yolov5m의 inference time은 20ms정도이며 실제 실행해본 결과 그림 8와 같이 inference time이 평균 14.05ms로 위 표보다 높은 성능을 보였고 목표 요구사항을 충족하였다.
 
-###2. 지도 개선
+### 2. 지도 개선
 
 ![image](https://user-images.githubusercontent.com/65644486/139804296-6b066080-eeb5-4c8f-a625-59d00d2a8094.png)
 
 realsense d435i 카메라를 사용하여 depth 이미지 추출하고 ORB SLAM 기반으로 지도를 만들었지만 만들어진 지도가 시인성이 떨어지는 문제가 발생하였다.
 이를 해결하기 위해 고안한 방법은 다음과 같다.
 
-###2.1. depth 밝기 조정
+### 2.1. depth 밝기 조정
 
 ![image](https://user-images.githubusercontent.com/65644486/139804393-52ce7816-fbbd-475b-8e6e-6e1c95c92812.png)
 
@@ -82,7 +69,7 @@ opendataset의 depth 이미지 밝기가 우리와 비교해서 확연히 밝았
 
 그림 14 개선된 depth 이미지로 생성된 지도
 
-###2.2. noise 제거
+### 2.2. noise 제거
 
 지도를 생성할 때 오류로 발생된 point(noise)들을 Statistical- Outlier-Removal filter로 제거하였다. Statistical- Outlier-Removal filter는 이웃 근접 point들과 평균 거리 정보를 계산하여 분포를 만들고 그 만든 분포가 gaussian distribution 따른다는 가정하에 나머지는 noise로 간주, 제거하는 방식이다.
 
@@ -90,7 +77,7 @@ opendataset의 depth 이미지 밝기가 우리와 비교해서 확연히 밝았
 
 그림 15 noise 제거 전 후
 
-###2.3. 천장 제거
+### 2.3. 천장 제거
 
 천장을 제거하여 위에서 내부가 보이도록 하여 지도를 보기좋게 하려했다. 바닥 제거에 많이 쓰이는 RANSAC 알고리즘을 사용하였고 z값을 조정해 천장을 제거 하려했으나 만들어진 지도의 z축이 예상과 다르게 일정하지 않고 비스듬한 지도가 제작되어 알고리즘을 적용해도 변화가 없었다.
 
