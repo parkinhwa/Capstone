@@ -85,7 +85,7 @@ opendataset의 depth 이미지 밝기가 우리와 비교해서 확연히 밝았
 
 그림 16 천장제거 전 후
 
-###3. 인터페이스  
+### 3. 인터페이스  
 
 촬영한 영상만 있으면 사용자가 지도를 만들 수 있도록 지도 제작 과정을 자동화하는 인터페이스를 제작했다.
 
@@ -94,3 +94,8 @@ opendataset의 depth 이미지 밝기가 우리와 비교해서 확연히 밝았
 그림 17 지도를 제작, 확인하는 인터페이스
 
 드론으로 촬영한 .bag파일 영상을 가져와서 지도를 제작하기를 누르면 color 이미지와 depth 이미지를 나누고 그 이미지 토대로 지도를 제작한다. 제작한 지도는 ORBSLAM2_with_PCL 폴더에 저장되며 저장된 지도를 불러와 확인할 수 있다. 버튼을 누르면 sh 파일을 작동시켜 command 창에서 쳐야하는 모든 명령어를 수행하게 만들었고 버튼을 누르고 지도제작 sh가 작동하면서 인터페이스가 중간에 중단하는 문제가 발생하였으나 스레드를 사용하여 해결하였다.
+
+### 4. 라즈베리파이 세팅
+드론의 부착할 라즈베리파이는 realsense camera로 영상을 촬영해야하고 그 영상을 컴퓨터가 받아서 지도를 제작한다.
+intel에서 제공하는 realsense SDK가 설치된 리눅스가 있어 그것을 SD카드에 포팅한 후 라즈베리파이에 넣어주었다.
+관련 사이트 - https://dev.intelrealsense.com/docs/open-source-ethernet-networking-for-intel-realsense-depth-cameras#25-first-boot
