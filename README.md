@@ -98,4 +98,5 @@ opendataset의 depth 이미지 밝기가 우리와 비교해서 확연히 밝았
 ### 4. 라즈베리파이 세팅
 드론의 부착할 라즈베리파이는 realsense camera로 영상을 촬영해야하고 그 영상을 컴퓨터가 받아서 지도를 제작한다.
 intel에서 제공하는 realsense SDK가 설치된 리눅스가 있어 그것을 SD카드에 포팅한 후 라즈베리파이에 넣어주었다.
+
 관련 사이트 - https://dev.intelrealsense.com/docs/open-source-ethernet-networking-for-intel-realsense-depth-cameras#25-first-boot
