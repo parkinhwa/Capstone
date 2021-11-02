@@ -52,6 +52,8 @@ loss (손실률)은 낮을수록 높은 성능을 지닌다.
 
 그림7를 보면 본 프로젝트와 같은 환경(Tesla T4 GPU)에서 테스트한 inference time을 확인할 수 있다. 그림에서 yolov5m의 inference time은 20ms정도이며 실제 실행해본 결과 그림 8와 같이 inference time이 평균 14.05ms로 위 표보다 높은 성능을 보였고 목표 요구사항을 충족하였다.
 
+관련 코드 - https://drive.google.com/drive/folders/1rs-JgHak2jNzhdjyJF9mRevrhs4lLOA-?usp=sharing
+
 ### 2. 지도 개선
 
 ![image](https://user-images.githubusercontent.com/65644486/139804296-6b066080-eeb5-4c8f-a625-59d00d2a8094.png)
